@@ -38,7 +38,11 @@ function getGithubData(){
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [  tetondan,
+  dustinmyers,
+  justsml,
+  luishrd,
+  bigknell];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -59,6 +63,58 @@ const followersArray = [];
 </div>
 
 */
+function cardComponent(param){
+const div = document.createElement('div');
+div.classList.add('card');
+
+const image = document.createElement('img');
+image.setAttribute = ('src',data.avatar_url);
+
+const div2 = document.createElement('div');
+div2.classList.add('card-info');
+
+const headerThree = document.createElement('h3');
+h3.classList.add('name');
+h3.textContent = `${data.name}`;
+
+const pUserName = document.createElement('p');
+pUserName.classList.add('username');
+pUserName.textContent = `${data.login}`;
+
+const pLocation = document.createElement('p');
+pLocation.textContent = `${data.location}`;
+
+const pProfile = document.createElement('p');
+pProfile.textContent = "Profile: "
+
+const aLink = document.createElement('a');
+a.setAttribute('href',data.html_url);
+a.textContent = `${data.html_url}`;
+
+const pFollowers = document.createElement('p');
+pFollowers.textContent = `Followers: ${data.followers}`;
+
+const pFollowing = document.createElement('p');
+pFollowing.textContent = `Following: ${data.following}`;
+
+const pBio = document.createElement('p');
+pBio.textContent = `Bio: ${data.bio}`;
+
+
+pProfile.appendChild(aLink);
+div2.appendChild(pProfile);
+div2.appendChild(headerThree);
+div2.appendChild(pUserName);
+div2.appendChild(pLocation);
+div2.appendChild(pFollowers);
+div2.appendChild(pFollowing);
+div2.appendChild(pBio);
+
+div.appendChild(image);
+div.appendChild(div2);
+
+return div;
+}
 
 /* List of LS Instructors Github username's: 
   tetondan
