@@ -51,6 +51,11 @@ const followersArray = ['tetondan',
   'luishrd',
   'bigknell',
   'tolls-3',
+  'jasynmarais',
+  'VictorArowo',
+  'emkayDauda',
+  'curm90',
+  'fosterferret'
   ];
 
   followersArray.forEach(getGithubData);
