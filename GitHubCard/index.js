@@ -2,13 +2,17 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+
 function getGithubData(username){
   axios.get(`https://api.github.com/users/${username}`)
+
     .then(response => { 
       // debugger;
-      document.body.innerText = response.data.login;
+      // document.body.innerText = response.data.id;
+      const anotherCard = cardComponent(response.data);
+			cardsContainer.appendChild(anotherCard);
 
-      return response.data;
+      // return response.data;
     })
     .catch(error => { // error is what the promise rejected to (what it looks like depends on axios)
       // document.body.innerText = error.message;
@@ -30,7 +34,7 @@ function getGithubData(username){
            create a new component and add it to the DOM as a child of .cards
 */
 
-
+const cardsContainer = document.querySelector('.cards');
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
           , manually find some other users' github handles, or use the list found 
@@ -76,7 +80,8 @@ const division = document.createElement('div');
 division.classList.add('card');
 
 const image = document.createElement('img');
-image.setAttribute = ('src',data.avatar_url);
+// image.src = data.avatar_url;
+image.setAttribute('src',data.avatar_url);
 
 const division2 = document.createElement('div');
 division2.classList.add('card-info');
