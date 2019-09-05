@@ -2,6 +2,20 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+function getGithubData(){
+  axios.get('https://api.github.com/users/tolls-3')
+    .then(response => { 
+      // debugger;
+      document.body.innerText = response.data.login;
+    })
+    .catch(error => { // error is what the promise rejected to (what it looks like depends on axios)
+      document.body.innerText = error.message;
+    });
+
+  }
+    
+// document.querySelector('p')
+// .addEventListener('click', getGithubData);
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
