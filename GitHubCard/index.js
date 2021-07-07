@@ -3,17 +3,38 @@
            https://api.github.com/users/<your name>
 */
 
+function getGithubData(username){
+  axios.get(`https://api.github.com/users/${username}`)
+
+    .then(response => { 
+      // debugger;
+      // document.body.innerText = response.data.id;
+      const anotherCard = cardComponent(response.data);
+			cardsContainer.appendChild(anotherCard);
+
+      // return response.data;
+    })
+    .catch(error => { // error is what the promise rejected to (what it looks like depends on axios)
+      // document.body.innerText = error.message;
+      console.error(error);
+    });
+
+  }
+    
+
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
 
    Skip to Step 3.
 */
+ 
 
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
 */
 
+const cardsContainer = document.querySelector('.cards');
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
           , manually find some other users' github handles, or use the list found 
@@ -24,7 +45,20 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan',
+  'dustinmyers',
+  'justsml',
+  'luishrd',
+  'bigknell',
+  'tolls-3',
+  'jasynmarais',
+  'VictorArowo',
+  'emkayDauda',
+  'curm90',
+  'fosterferret'
+  ];
+
+  followersArray.forEach(getGithubData);
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -45,6 +79,61 @@ const followersArray = [];
 </div>
 
 */
+function cardComponent(data){
+
+const division = document.createElement('div');
+division.classList.add('card');
+
+const image = document.createElement('img');
+// image.src = data.avatar_url;
+image.setAttribute('src',data.avatar_url);
+
+const division2 = document.createElement('div');
+division2.classList.add('card-info');
+
+const headerThree = document.createElement('h3');
+headerThree.classList.add('name');
+headerThree.textContent = `${data.name}`;
+
+const pUserName = document.createElement('p');
+pUserName.classList.add('username');
+pUserName.textContent = `${data.login}`;
+
+const pLocation = document.createElement('p');
+pLocation.textContent = `${data.location}`;
+
+const pProfile = document.createElement('p');
+pProfile.textContent = "Profile: "
+
+const aLink = document.createElement('a');
+aLink.setAttribute('href',data.html_url);
+aLink.textContent = `${data.html_url}`;
+
+const pFollowers = document.createElement('p');
+pFollowers.textContent = `Followers: ${data.followers}`;
+
+const pFollowing = document.createElement('p');
+pFollowing.textContent = `Following: ${data.following}`;
+
+const pBio = document.createElement('p');
+pBio.textContent = `Bio: ${data.bio}`;
+
+
+pProfile.appendChild(aLink);
+
+division2.appendChild(pProfile);
+division2.appendChild(headerThree);
+division2.appendChild(pUserName);
+division2.appendChild(pLocation);
+division2.appendChild(pFollowers);
+division2.appendChild(pFollowing);
+division2.appendChild(pBio);
+
+division.appendChild(image);
+division.appendChild(division2);
+// console.log(division);
+return division;
+}
 
 /* List of LS Instructors Github username's: 
   tetondan
